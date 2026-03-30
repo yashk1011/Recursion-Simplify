@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recursion Viz — Interactive Recursion & Call-Stack Visualizer
 
-## Getting Started
+Recursion Viz is a web app that helps you **understand recursion by watching it execute**. Paste (or pick) a recursive function, run it step-by-step, and see a **live call tree** and execution trace so you can debug mental models around stack frames, base cases, and branching recursion.
 
-First, run the development server:
+> Built to make “what is the call stack doing right now?” visual and intuitive.
+
+## What you can do
+
+- **Run recursion step-by-step**: play/pause, step, and scrub through execution.
+- **Visualize a call tree**: see how recursive calls expand and return over time.
+- **Edit code in the browser**: Monaco-based editor for a fast, IDE-like feel.
+- **Try built-in presets**: classic recursive algorithms (factorial, fibonacci, merge sort, tower of hanoi, etc.).
+
+## Tech stack
+
+- **Framework**: Next.js (App Router) + React + TypeScript
+- **Visualization**: D3 (call-tree rendering)
+- **Editor**: `@monaco-editor/react`
+- **Styling**: Tailwind CSS
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Project structure (high-level)
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/`: Next.js routes/layout and global styling
+- `src/components/`: UI components (editor, controls, visualization, panels)
+- `src/engine/`: execution + call-tree generation logic
+- `src/context/`: shared state for execution/playback
+- `src/presets/`: sample recursive algorithms you can load instantly
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How it works (conceptually)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Your function (or a preset) is executed by the app’s **execution engine**.
+2. The engine records a stream of events (call/return/values).
+3. Those events are transformed into a **call tree model**.
+4. The UI renders the tree with D3 and lets you **play back** the execution timeline.
 
-## Deploy on Vercel
+## Resume-ready highlights (copy/paste)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Built an **interactive recursion visualizer** that replays execution step-by-step and renders a **dynamic call tree** to teach/debug recursive algorithms.
+- Implemented a lightweight **execution + event logging engine** and a **playback controller** to scrub through call-stack state over time.
+- Created a responsive UI with **Next.js + React + TypeScript**, an in-browser **Monaco** editor, and **D3** visualizations.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+- `npm run dev`: start local dev server
+- `npm run build`: production build
+- `npm run start`: run production server
+- `npm run lint`: run ESLint
+
+## Optional: add a demo link / screenshot
+
+- **Live demo**: add your deployed URL here (Vercel works great)
+- **Screenshot/GIF**: add `public/demo.png` (or a GIF) and embed it here
+
+## Deploy
+
+Deploy on Vercel (recommended for Next.js). See Next.js docs: [Deploying](https://nextjs.org/docs/app/building-your-application/deploying).
